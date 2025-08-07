@@ -114,14 +114,14 @@ bun add -d @types/uuid
 
 #### 2.5 Todoサービス
 **Red:**
-- [ ] getTodosのビジネスロジックテストを作成
-- [ ] getTodoByIdのビジネスロジックテストを作成
-- [ ] createTodoのビジネスロジックテストを作成
-- [ ] updateTodoのビジネスロジックテストを作成
-- [ ] deleteTodoのビジネスロジックテストを作成
+- [x] getTodosのビジネスロジックテストを作成
+- [x] getTodoByIdのビジネスロジックテストを作成
+- [x] createTodoのビジネスロジックテストを作成
+- [x] updateTodoのビジネスロジックテストを作成
+- [x] deleteTodoのビジネスロジックテストを作成
 
 **Green:**
-- [ ] `src/services/todo.service.ts`を実装
+- [x] `src/services/todo.service.ts`を実装
 - [ ] `src/utils/errors.ts`を実装
 
 **Refactor:**
