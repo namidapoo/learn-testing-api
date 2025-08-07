@@ -1,5 +1,6 @@
 import { swaggerUI } from "@hono/swagger-ui";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { cors } from "hono/cors";
 import { createTodoRoutes } from "./api/routes/todos";
 
 export type Env = {
@@ -7,6 +8,16 @@ export type Env = {
 };
 
 const app = new OpenAPIHono<Env>();
+
+// CORS設定
+app.use(
+	"/*",
+	cors({
+		origin: "*",
+		allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+		allowHeaders: ["Content-Type"],
+	}),
+);
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");
