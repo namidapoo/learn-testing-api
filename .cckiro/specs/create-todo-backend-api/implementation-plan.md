@@ -40,27 +40,27 @@ bun add -d @types/uuid
 ## 2. TDDによる段階的実装
 
 ### フェーズ0: 依存関係インストールとD1セットアップ（30分）
-1. [ ] 必要なパッケージをインストール
-2. [ ] D1データベースを作成（`wrangler d1 create todo-db`）
-3. [ ] wrangler.jsoncのD1設定コメントを解除して設定を追加
-4. [ ] `bun run cf-typegen`を実行して型定義を自動生成
-5. [ ] Drizzle設定ファイルを作成
+1. [x] 必要なパッケージをインストール
+2. [x] D1データベースを作成（`wrangler d1 create todo-db`）
+3. [x] wrangler.jsoncのD1設定コメントを解除して設定を追加
+4. [x] `bun run cf-typegen`を実行して型定義を自動生成
+5. [x] Drizzle設定ファイルを作成
 
 ### フェーズ1: OpenAPIアプリケーション基盤（Day 1）
 
 #### 2.1 OpenAPIHonoへの移行
 **Red:**
-- [ ] OpenAPIHonoインスタンスのテストを作成
-- [ ] Swagger UIアクセスのテストを作成
+- [x] OpenAPIHonoインスタンスのテストを作成
+- [x] Swagger UIアクセスのテストを作成
 
 **Green:**
-- [ ] 既存の`src/index.ts`をOpenAPIHonoに変更
-- [ ] Swagger UI設定を追加（/docエンドポイント）
-- [ ] OpenAPIドキュメント設定を追加
+- [x] 既存の`src/index.ts`をOpenAPIHonoに変更
+- [x] Swagger UI設定を追加（/docエンドポイント）
+- [x] OpenAPIドキュメント設定を追加
 
 **Refactor:**
-- [ ] 既存のindex.test.tsを修正
-- [ ] utilsファイルを整理（必要に応じて削除）
+- [x] 既存のindex.test.tsを修正
+- [x] utilsファイルを整理（必要に応じて削除）
 
 #### 2.2 データベース基盤
 **Red:**
