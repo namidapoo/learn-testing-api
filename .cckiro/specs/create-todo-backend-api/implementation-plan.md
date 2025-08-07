@@ -80,12 +80,12 @@ bun add -d @types/uuid
 
 #### 2.3 Zodスキーマ定義
 **Red:**
-- [ ] TodoSchemaのバリデーションテストを作成
-- [ ] CreateTodoSchemaのバリデーションテストを作成
-- [ ] UpdateTodoSchemaのバリデーションテストを作成
+- [x] TodoSchemaのバリデーションテストを作成
+- [x] CreateTodoSchemaのバリデーションテストを作成
+- [x] UpdateTodoSchemaのバリデーションテストを作成
 
 **Green:**
-- [ ] `src/api/schemas/todo.ts`を実装
+- [x] `src/api/schemas/todo.ts`を実装
 - [ ] `src/types/todo.ts`を実装（型定義）
 
 **Refactor:**
