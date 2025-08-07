@@ -2,19 +2,63 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { TodoService } from "../../services/todo.service";
 import { createTodoRoutes } from "./todos";
 
+// モックの設定
+vi.mock("../../db/client", () => ({
+	createDb: vi.fn(() => ({
+		select: vi.fn(),
+		insert: vi.fn(),
+		update: vi.fn(),
+		delete: vi.fn(),
+	})),
+}));
+
+vi.mock("../../repositories/todo.repository", () => ({
+	TodoRepository: vi.fn().mockImplementation(() => ({
+		findAll: vi.fn(),
+		findById: vi.fn(),
+		create: vi.fn(),
+		update: vi.fn(),
+		delete: vi.fn(),
+	})),
+}));
+
+const mockService = {
+	getTodos: vi.fn(),
+	getTodoById: vi.fn(),
+	createTodo: vi.fn(),
+	updateTodo: vi.fn(),
+	deleteTodo: vi.fn(),
+};
+
+vi.mock("../../services/todo.service", () => ({
+	TodoService: vi.fn().mockImplementation(() => mockService),
+}));
+
 describe("TODO API Routes", () => {
 	let app: ReturnType<typeof createTodoRoutes>;
-	let mockService: Partial<TodoService>;
 
 	beforeEach(() => {
-		mockService = {
-			getTodos: vi.fn(),
-			getTodoById: vi.fn(),
-			createTodo: vi.fn(),
-			updateTodo: vi.fn(),
-			deleteTodo: vi.fn(),
-		};
-		app = createTodoRoutes();
+		// モックをリセット
+		vi.clearAllMocks();
+
+		// すべてのモックをリセット
+		mockService.getTodos = vi.fn();
+		mockService.getTodoById = vi.fn();
+		mockService.createTodo = vi.fn();
+		mockService.updateTodo = vi.fn();
+		mockService.deleteTodo = vi.fn();
+
+		// テスト用のenvを持つアプリケーションを作成
+		const testApp = createTodoRoutes();
+		// envを注入
+		app = {
+			request: async (path: string, init?: RequestInit) => {
+				const req = new Request(`http://localhost${path}`, init);
+				const env = { DB: {} };
+				const ctx = {};
+				return testApp.fetch(req, env, ctx);
+			},
+		} as any;
 	});
 
 	describe("GET /api/todos", () => {
