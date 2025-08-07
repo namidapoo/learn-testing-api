@@ -1,6 +1,11 @@
+import type { ExecutionContext } from "hono";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { TodoService } from "../../services/todo.service";
 import { createTodoRoutes } from "./todos";
+
+// テスト用の型定義
+interface TestApp {
+	request: (path: string, init?: RequestInit) => Promise<Response>;
+}
 
 // モックの設定
 vi.mock("../../db/client", () => ({
@@ -35,7 +40,7 @@ vi.mock("../../services/todo.service", () => ({
 }));
 
 describe("TODO API Routes", () => {
-	let app: ReturnType<typeof createTodoRoutes>;
+	let app: TestApp;
 
 	beforeEach(() => {
 		// モックをリセット
@@ -55,10 +60,14 @@ describe("TODO API Routes", () => {
 			request: async (path: string, init?: RequestInit) => {
 				const req = new Request(`http://localhost${path}`, init);
 				const env = { DB: {} };
-				const ctx = {};
+				const ctx: ExecutionContext = {
+					waitUntil: () => {},
+					passThroughOnException: () => {},
+					props: {},
+				};
 				return testApp.fetch(req, env, ctx);
 			},
-		} as any;
+		};
 	});
 
 	describe("GET /api/todos", () => {
