@@ -59,6 +59,7 @@ export const TodoIdParamSchema = z.object({
 export const TodoQuerySchema = z
 	.object({
 		completed: z.enum(["true", "false"]).optional().openapi({
+			description: "完了状態でフィルタリング（true: 完了済み, false: 未完了）",
 			example: "false",
 		}),
 		sortBy: z.enum(["createdAt"]).optional().openapi({

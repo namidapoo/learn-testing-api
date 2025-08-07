@@ -2,6 +2,7 @@ import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
 import { z } from "zod";
 import {
 	CreateTodoSchema,
+	TodoQuerySchema,
 	TodoSchema,
 	UpdateTodoSchema,
 } from "../schemas/todo";
@@ -10,16 +11,16 @@ const ParamsSchema = z.object({
 	id: z.string(),
 });
 
-const QuerySchema = z.object({
-	completed: z
-		.string()
-		.optional()
-		.transform((val) =>
-			val === "true" ? true : val === "false" ? false : undefined,
-		),
-	sortBy: z.enum(["createdAt"]).optional(),
-	order: z.enum(["asc", "desc"]).optional(),
-});
+// クエリパラメータのスキーマ（TodoQuerySchemaを使用してtransformを適用）
+const QuerySchema = TodoQuerySchema.transform((data) => ({
+	...data,
+	completed:
+		data.completed === "true"
+			? true
+			: data.completed === "false"
+				? false
+				: undefined,
+}));
 
 export function createTodoRoutes() {
 	const app = new OpenAPIHono<{ Bindings: CloudflareBindings }>();
