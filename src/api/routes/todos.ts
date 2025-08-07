@@ -1,6 +1,5 @@
 import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
 import { z } from "zod";
-import type { TodoService } from "../../services/todo.service";
 import {
 	CreateTodoSchema,
 	TodoSchema,
