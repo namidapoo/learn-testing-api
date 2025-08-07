@@ -29,8 +29,12 @@ app.doc("/openapi.json", {
 	},
 	servers: [
 		{
+			url: "https://learn-testing-api.namidapoo.workers.dev",
+			description: "Production",
+		},
+		{
 			url: "http://localhost:8787",
-			description: "開発サーバー",
+			description: "Local Development",
 		},
 	],
 });
