@@ -96,15 +96,15 @@ bun add -d @types/uuid
 
 #### 2.4 Todoリポジトリ
 **Red:**
-- [ ] findAllのテストを作成
-- [ ] findByIdのテストを作成
-- [ ] createのテストを作成
-- [ ] updateのテストを作成
-- [ ] deleteのテストを作成
+- [x] findAllのテストを作成
+- [x] findByIdのテストを作成
+- [x] createのテストを作成
+- [x] updateのテストを作成
+- [x] deleteのテストを作成
 
 **Green:**
-- [ ] `src/repositories/todo.repository.ts`を実装
-- [ ] `src/utils/id.ts`を実装（UUID生成）
+- [x] `src/repositories/todo.repository.ts`を実装
+- [x] `src/utils/id.ts`を実装（UUID生成）
 
 **Refactor:**
 - [ ] クエリビルダーを最適化
