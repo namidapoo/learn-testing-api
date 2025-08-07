@@ -3,7 +3,7 @@ import type { TodoService } from "../../services/todo.service";
 import { createTodoRoutes } from "./todos";
 
 describe("TODO API Routes", () => {
-	let app: any;
+	let app: ReturnType<typeof createTodoRoutes>;
 	let mockService: Partial<TodoService>;
 
 	beforeEach(() => {
@@ -39,7 +39,15 @@ describe("TODO API Routes", () => {
 			const data = await res.json();
 
 			expect(res.status).toBe(200);
-			expect(data).toEqual(mockTodos);
+			expect(data).toEqual([
+				{
+					id: "1",
+					title: "テストTODO1",
+					completed: false,
+					createdAt: "2024-01-01T00:00:00Z",
+					updatedAt: "2024-01-01T00:00:00Z",
+				},
+			]);
 			expect(mockService.getTodos).toHaveBeenCalledWith(undefined);
 		});
 
@@ -131,7 +139,13 @@ describe("TODO API Routes", () => {
 			const data = await res.json();
 
 			expect(res.status).toBe(200);
-			expect(data).toEqual(mockTodo);
+			expect(data).toEqual({
+				id: "1",
+				title: "テストTODO",
+				completed: false,
+				createdAt: "2024-01-01T00:00:00Z",
+				updatedAt: "2024-01-01T00:00:00Z",
+			});
 			expect(mockService.getTodoById).toHaveBeenCalledWith("1");
 		});
 
@@ -177,7 +191,13 @@ describe("TODO API Routes", () => {
 			const data = await res.json();
 
 			expect(res.status).toBe(200);
-			expect(data).toEqual(updatedTodo);
+			expect(data).toEqual({
+				id: "1",
+				title: "更新されたTODO",
+				completed: true,
+				createdAt: "2024-01-01T00:00:00Z",
+				updatedAt: "2024-01-02T00:00:00Z",
+			});
 			expect(mockService.updateTodo).toHaveBeenCalledWith("1", updateData);
 		});
 

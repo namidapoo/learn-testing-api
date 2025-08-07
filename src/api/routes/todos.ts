@@ -54,7 +54,13 @@ export function createTodoRoutes(service: TodoService) {
 		const todos = await service.getTodos(
 			Object.values(filter).some((v) => v !== undefined) ? filter : undefined,
 		);
-		return c.json(todos);
+		// null値をundefinedに変換
+		const formattedTodos = todos.map((todo) => ({
+			...todo,
+			description: todo.description ?? undefined,
+			dueDate: todo.dueDate ?? undefined,
+		}));
+		return c.json(formattedTodos);
 	});
 
 	// POST /api/todos - 作成
@@ -88,7 +94,12 @@ export function createTodoRoutes(service: TodoService) {
 	app.openapi(createTodoRoute, async (c) => {
 		const data = c.req.valid("json");
 		const todo = await service.createTodo(data);
-		return c.json(todo, 201);
+		const formattedTodo = {
+			...todo,
+			description: todo.description ?? undefined,
+			dueDate: todo.dueDate ?? undefined,
+		};
+		return c.json(formattedTodo, 201);
 	});
 
 	// GET /api/todos/:id - 詳細取得
@@ -117,8 +128,13 @@ export function createTodoRoutes(service: TodoService) {
 		const { id } = c.req.valid("param");
 		try {
 			const todo = await service.getTodoById(id);
-			return c.json(todo);
-		} catch (error) {
+			const formattedTodo = {
+				...todo,
+				description: todo.description ?? undefined,
+				dueDate: todo.dueDate ?? undefined,
+			};
+			return c.json(formattedTodo);
+		} catch (_error) {
 			return c.json({ error: "Todo not found" }, 404);
 		}
 	});
@@ -157,8 +173,13 @@ export function createTodoRoutes(service: TodoService) {
 		const data = c.req.valid("json");
 		try {
 			const todo = await service.updateTodo(id, data);
-			return c.json(todo);
-		} catch (error) {
+			const formattedTodo = {
+				...todo,
+				description: todo.description ?? undefined,
+				dueDate: todo.dueDate ?? undefined,
+			};
+			return c.json(formattedTodo);
+		} catch (_error) {
 			return c.json({ error: "Todo not found" }, 404);
 		}
 	});
@@ -185,7 +206,7 @@ export function createTodoRoutes(service: TodoService) {
 		try {
 			await service.deleteTodo(id);
 			return c.body(null, 204);
-		} catch (error) {
+		} catch (_error) {
 			return c.json({ error: "Todo not found" }, 404);
 		}
 	});
