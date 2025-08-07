@@ -9,7 +9,6 @@ describe("Drizzleスキーマ", () => {
 			expect(todos.title).toBeDefined();
 			expect(todos.description).toBeDefined();
 			expect(todos.completed).toBeDefined();
-			expect(todos.dueDate).toBeDefined();
 			expect(todos.createdAt).toBeDefined();
 			expect(todos.updatedAt).toBeDefined();
 		});

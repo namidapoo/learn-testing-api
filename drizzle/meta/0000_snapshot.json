@@ -36,13 +36,6 @@
 					"autoincrement": false,
 					"default": false
 				},
-				"due_date": {
-					"name": "due_date",
-					"type": "text",
-					"primaryKey": false,
-					"notNull": false,
-					"autoincrement": false
-				},
 				"created_at": {
 					"name": "created_at",
 					"type": "text",

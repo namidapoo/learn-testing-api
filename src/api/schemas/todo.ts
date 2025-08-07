@@ -15,9 +15,6 @@ export const TodoSchema = z
 		completed: z.boolean().openapi({
 			example: false,
 		}),
-		dueDate: z.string().datetime().optional().openapi({
-			example: "2024-12-31T23:59:59Z",
-		}),
 		createdAt: z.string().datetime().openapi({
 			example: "2024-01-01T00:00:00Z",
 		}),
@@ -32,7 +29,6 @@ export const CreateTodoSchema = z
 	.object({
 		title: z.string().min(1).max(100),
 		description: z.string().max(500).optional(),
-		dueDate: z.string().datetime().optional(),
 	})
 	.openapi("CreateTodo");
 
@@ -42,7 +38,6 @@ export const UpdateTodoSchema = z
 		title: z.string().min(1).max(100).optional(),
 		description: z.string().max(500).optional(),
 		completed: z.boolean().optional(),
-		dueDate: z.string().datetime().optional(),
 	})
 	.openapi("UpdateTodo");
 
@@ -66,8 +61,8 @@ export const TodoQuerySchema = z
 		completed: z.enum(["true", "false"]).optional().openapi({
 			example: "false",
 		}),
-		sortBy: z.enum(["dueDate", "createdAt"]).optional().openapi({
-			example: "dueDate",
+		sortBy: z.enum(["createdAt"]).optional().openapi({
+			example: "createdAt",
 		}),
 		order: z.enum(["asc", "desc"]).optional().openapi({
 			example: "asc",

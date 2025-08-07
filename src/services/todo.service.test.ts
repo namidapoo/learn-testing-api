@@ -25,7 +25,6 @@ describe("TodoService", () => {
 					title: "テストTODO1",
 					description: null,
 					completed: false,
-					dueDate: null,
 					createdAt: "2024-01-01T00:00:00Z",
 					updatedAt: "2024-01-01T00:00:00Z",
 				},
@@ -34,7 +33,6 @@ describe("TodoService", () => {
 					title: "テストTODO2",
 					description: "説明",
 					completed: true,
-					dueDate: "2024-12-31T23:59:59Z",
 					createdAt: "2024-01-01T00:00:00Z",
 					updatedAt: "2024-01-01T00:00:00Z",
 				},
@@ -53,7 +51,6 @@ describe("TodoService", () => {
 		it("フィルタ条件を渡すことができる", async () => {
 			const filter = {
 				completed: true,
-				sortBy: "dueDate" as const,
 				order: "desc" as const,
 			};
 
@@ -74,7 +71,6 @@ describe("TodoService", () => {
 				title: "テストTODO",
 				description: null,
 				completed: false,
-				dueDate: null,
 				createdAt: "2024-01-01T00:00:00Z",
 				updatedAt: "2024-01-01T00:00:00Z",
 			};
@@ -105,7 +101,6 @@ describe("TodoService", () => {
 			const createData = {
 				title: "新しいTODO",
 				description: "説明",
-				dueDate: "2024-12-31T23:59:59Z",
 			};
 
 			const mockCreatedTodo = {
@@ -151,7 +146,6 @@ describe("TodoService", () => {
 				title: "更新されたTODO",
 				description: null,
 				completed: true,
-				dueDate: null,
 				createdAt: "2024-01-01T00:00:00Z",
 				updatedAt: "2024-01-02T00:00:00Z",
 			};

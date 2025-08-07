@@ -17,7 +17,7 @@ const QuerySchema = z.object({
 		.transform((val) =>
 			val === "true" ? true : val === "false" ? false : undefined,
 		),
-	sortBy: z.enum(["dueDate", "createdAt"]).optional(),
+	sortBy: z.enum(["createdAt"]).optional(),
 	order: z.enum(["asc", "desc"]).optional(),
 });
 
@@ -68,7 +68,6 @@ export function createTodoRoutes() {
 		const formattedTodos = todos.map((todo) => ({
 			...todo,
 			description: todo.description ?? undefined,
-			dueDate: todo.dueDate ?? undefined,
 		}));
 		return c.json(formattedTodos);
 	});
@@ -118,7 +117,6 @@ export function createTodoRoutes() {
 		const formattedTodo = {
 			...todo,
 			description: todo.description ?? undefined,
-			dueDate: todo.dueDate ?? undefined,
 		};
 		return c.json(formattedTodo, 201);
 	});
@@ -163,7 +161,6 @@ export function createTodoRoutes() {
 			const formattedTodo = {
 				...todo,
 				description: todo.description ?? undefined,
-				dueDate: todo.dueDate ?? undefined,
 			};
 			return c.json(formattedTodo);
 		} catch (_error) {
@@ -219,7 +216,6 @@ export function createTodoRoutes() {
 			const formattedTodo = {
 				...todo,
 				description: todo.description ?? undefined,
-				dueDate: todo.dueDate ?? undefined,
 			};
 			return c.json(formattedTodo);
 		} catch (_error) {

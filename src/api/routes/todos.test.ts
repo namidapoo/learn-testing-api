@@ -78,7 +78,6 @@ describe("TODO API Routes", () => {
 					title: "テストTODO1",
 					description: null,
 					completed: false,
-					dueDate: null,
 					createdAt: "2024-01-01T00:00:00Z",
 					updatedAt: "2024-01-01T00:00:00Z",
 				},
@@ -108,13 +107,13 @@ describe("TODO API Routes", () => {
 			(mockService.getTodos as ReturnType<typeof vi.fn>).mockResolvedValue([]);
 
 			const res = await app.request(
-				"/api/todos?completed=true&sortBy=dueDate&order=desc",
+				"/api/todos?completed=true&sortBy=createdAt&order=desc",
 			);
 
 			expect(res.status).toBe(200);
 			expect(mockService.getTodos).toHaveBeenCalledWith({
 				completed: true,
-				sortBy: "dueDate",
+				sortBy: "createdAt",
 				order: "desc",
 			});
 		});
@@ -125,7 +124,6 @@ describe("TODO API Routes", () => {
 			const newTodo = {
 				title: "新しいTODO",
 				description: "説明",
-				dueDate: "2024-12-31T23:59:59Z",
 			};
 
 			const createdTodo = {
@@ -179,7 +177,6 @@ describe("TODO API Routes", () => {
 				title: "テストTODO",
 				description: null,
 				completed: false,
-				dueDate: null,
 				createdAt: "2024-01-01T00:00:00Z",
 				updatedAt: "2024-01-01T00:00:00Z",
 			};
@@ -225,7 +222,6 @@ describe("TODO API Routes", () => {
 				title: "更新されたTODO",
 				description: null,
 				completed: true,
-				dueDate: null,
 				createdAt: "2024-01-01T00:00:00Z",
 				updatedAt: "2024-01-02T00:00:00Z",
 			};

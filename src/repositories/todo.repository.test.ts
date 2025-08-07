@@ -74,7 +74,6 @@ describe("TodoRepository", () => {
 		it("フィルタとソートオプションを適用できる", async () => {
 			const options = {
 				completed: true,
-				sortBy: "dueDate" as const,
 				order: "desc" as const,
 			};
 
@@ -102,7 +101,6 @@ describe("TodoRepository", () => {
 			const newTodo = {
 				title: "新しいタスク",
 				description: "説明",
-				dueDate: "2024-12-31T23:59:59Z",
 			};
 
 			const result = await repository.create(newTodo);
@@ -132,7 +130,6 @@ describe("TodoRepository", () => {
 				title: "古いタスク",
 				description: null,
 				completed: false,
-				dueDate: null,
 				createdAt: "2024-01-01T00:00:00Z",
 				updatedAt: "2024-01-01T00:00:00Z",
 			};
@@ -182,7 +179,6 @@ describe("TodoRepository", () => {
 				title: "削除するタスク",
 				description: null,
 				completed: false,
-				dueDate: null,
 				createdAt: "2024-01-01T00:00:00Z",
 				updatedAt: "2024-01-01T00:00:00Z",
 			};

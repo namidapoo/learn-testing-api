@@ -15,7 +15,6 @@ describe("Zodスキーマ", () => {
 				title: "買い物に行く",
 				description: "牛乳とパンを買う",
 				completed: false,
-				dueDate: "2024-12-31T23:59:59Z",
 				createdAt: "2024-01-01T00:00:00Z",
 				updatedAt: "2024-01-01T00:00:00Z",
 			};
@@ -41,7 +40,6 @@ describe("Zodスキーマ", () => {
 			const validData = {
 				title: "新しいタスク",
 				description: "説明文",
-				dueDate: "2024-12-31T23:59:59Z",
 			};
 
 			const result = CreateTodoSchema.safeParse(validData);
@@ -109,7 +107,6 @@ describe("Zodスキーマ", () => {
 		it("有効なクエリパラメータを検証できる", () => {
 			const validQuery = {
 				completed: "true",
-				sortBy: "dueDate",
 				order: "asc",
 			};
 

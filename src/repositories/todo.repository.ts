@@ -5,21 +5,19 @@ import { generateId } from "../utils/id";
 
 export interface TodoFilter {
 	completed?: boolean;
-	sortBy?: "dueDate" | "createdAt";
+	sortBy?: "createdAt";
 	order?: "asc" | "desc";
 }
 
 export interface CreateTodoData {
 	title: string;
 	description?: string;
-	dueDate?: string;
 }
 
 export interface UpdateTodoData {
 	title?: string;
 	description?: string;
 	completed?: boolean;
-	dueDate?: string;
 }
 
 export class TodoRepository {
@@ -37,8 +35,7 @@ export class TodoRepository {
 
 		// ソート
 		if (filter?.sortBy) {
-			const column =
-				filter.sortBy === "dueDate" ? todos.dueDate : todos.createdAt;
+			const column = todos.createdAt;
 			const orderFunc = filter.order === "desc" ? desc : asc;
 			query = query.orderBy(orderFunc(column)) as typeof query;
 		}
@@ -65,7 +62,6 @@ export class TodoRepository {
 			title: data.title,
 			description: data.description || null,
 			completed: false,
-			dueDate: data.dueDate || null,
 			createdAt: now,
 			updatedAt: now,
 		};
