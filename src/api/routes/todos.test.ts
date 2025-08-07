@@ -14,7 +14,7 @@ describe("TODO API Routes", () => {
 			updateTodo: vi.fn(),
 			deleteTodo: vi.fn(),
 		};
-		app = createTodoRoutes(mockService as TodoService);
+		app = createTodoRoutes();
 	});
 
 	describe("GET /api/todos", () => {

@@ -22,8 +22,8 @@ const QuerySchema = z.object({
 	order: z.enum(["asc", "desc"]).optional(),
 });
 
-export function createTodoRoutes(service: TodoService) {
-	const app = new OpenAPIHono();
+export function createTodoRoutes() {
+	const app = new OpenAPIHono<{ Bindings: CloudflareBindings }>();
 
 	// GET /api/todos - 一覧取得
 	const getTodosRoute = createRoute({
@@ -45,6 +45,17 @@ export function createTodoRoutes(service: TodoService) {
 	});
 
 	app.openapi(getTodosRoute, async (c) => {
+		// サービスを動的に取得
+		const { createDb } = await import("../../db/client");
+		const { TodoRepository } = await import(
+			"../../repositories/todo.repository"
+		);
+		const { TodoService } = await import("../../services/todo.service");
+
+		const db = createDb(c.env.DB);
+		const repository = new TodoRepository(db);
+		const service = new TodoService(repository);
+
 		const query = c.req.valid("query");
 		const filter = {
 			completed: query.completed,
@@ -92,6 +103,17 @@ export function createTodoRoutes(service: TodoService) {
 	});
 
 	app.openapi(createTodoRoute, async (c) => {
+		// サービスを動的に取得
+		const { createDb } = await import("../../db/client");
+		const { TodoRepository } = await import(
+			"../../repositories/todo.repository"
+		);
+		const { TodoService } = await import("../../services/todo.service");
+
+		const db = createDb(c.env.DB);
+		const repository = new TodoRepository(db);
+		const service = new TodoService(repository);
+
 		const data = c.req.valid("json");
 		const todo = await service.createTodo(data);
 		const formattedTodo = {
@@ -125,6 +147,17 @@ export function createTodoRoutes(service: TodoService) {
 	});
 
 	app.openapi(getTodoRoute, async (c) => {
+		// サービスを動的に取得
+		const { createDb } = await import("../../db/client");
+		const { TodoRepository } = await import(
+			"../../repositories/todo.repository"
+		);
+		const { TodoService } = await import("../../services/todo.service");
+
+		const db = createDb(c.env.DB);
+		const repository = new TodoRepository(db);
+		const service = new TodoService(repository);
+
 		const { id } = c.req.valid("param");
 		try {
 			const todo = await service.getTodoById(id);
@@ -169,6 +202,17 @@ export function createTodoRoutes(service: TodoService) {
 	});
 
 	app.openapi(updateTodoRoute, async (c) => {
+		// サービスを動的に取得
+		const { createDb } = await import("../../db/client");
+		const { TodoRepository } = await import(
+			"../../repositories/todo.repository"
+		);
+		const { TodoService } = await import("../../services/todo.service");
+
+		const db = createDb(c.env.DB);
+		const repository = new TodoRepository(db);
+		const service = new TodoService(repository);
+
 		const { id } = c.req.valid("param");
 		const data = c.req.valid("json");
 		try {
@@ -202,6 +246,17 @@ export function createTodoRoutes(service: TodoService) {
 	});
 
 	app.openapi(deleteTodoRoute, async (c) => {
+		// サービスを動的に取得
+		const { createDb } = await import("../../db/client");
+		const { TodoRepository } = await import(
+			"../../repositories/todo.repository"
+		);
+		const { TodoService } = await import("../../services/todo.service");
+
+		const db = createDb(c.env.DB);
+		const repository = new TodoRepository(db);
+		const service = new TodoService(repository);
+
 		const { id } = c.req.valid("param");
 		try {
 			await service.deleteTodo(id);
