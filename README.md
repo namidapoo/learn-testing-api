@@ -4,8 +4,8 @@ TODO アプリケーションの RESTful API です。Cloudflare Workers 上で�
 
 ## デモ
 
-- **Swagger UI**: https://learn-testing-api.namidapoo.workers.dev/doc
-- **API エンドポイント**: https://learn-testing-api.namidapoo.workers.dev
+- **Swagger UI**: https://learn-testing-api.mfyuu.workers.dev/doc
+- **API エンドポイント**: https://learn-testing-api.mfyuu.workers.dev
 
 ## 機能
 
